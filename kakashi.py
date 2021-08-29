@@ -14,10 +14,7 @@ try:
     from pycenter import center
 except:
     os.system("python3 -m pip install pycenter")
-try:
-    from colorama import Fore
-except:
-    os.system("python3 -m pip install colorama")
+
 
 
 ctypes.windll.kernel32.SetConsoleTitleW("kakashi by uchiw4")
@@ -65,7 +62,7 @@ while True:
                     f.write(re.content)  
             i = str(int(i)+1)
         
-    print("\033[33m Chapitre "+chapitre+"\033[33m de "+manga+"\033[33m téléchargé mon reuf !"+Fore.RESET)
+    print("\033[33m Chapitre "+chapitre+"\033[33m de "+manga+"\033[33m téléchargé mon reuf !")
 
 
     restart = input("\033[33m On continue ? [o/n] ")
