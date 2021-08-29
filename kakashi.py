@@ -4,7 +4,7 @@ import ctypes
 try:
     import requests
 except:
-    os.system("python3 -m pip intall requests")
+    os.system("python3 -m pip install requests")
 try:
     from pyfade import Fade, Colors
 except:
@@ -73,6 +73,7 @@ while True:
     if restart == "o":
         os.system("cls")
         print(Fade.Vertical(Colors.red_to_yellow, center(mangadl)))
+        i = str(1)
     else:
         break
 
