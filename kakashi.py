@@ -1,12 +1,14 @@
 import os
 import ctypes
+from sys import platform
+
 
 try:
     import requests
 except:
     os.system("python3 -m pip install requests")
 try:
-    from pyfade import Fade, Colors
+    from pyfade imqport Fade, Colors
 except:
     os.system("python3 -m pip install pyfade")
 
@@ -16,8 +18,8 @@ except:
     os.system("python3 -m pip install pycenter")
 
 
-
-ctypes.windll.kernel32.SetConsoleTitleW("kakashi by uchiw4")
+if platform == "win32":
+    ctypes.windll.kernel32.SetConsoleTitleW("kakashi by uchiw4")
 
 mangadl = """  
                                                       
