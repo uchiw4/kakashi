@@ -1,25 +1,28 @@
 import os
 import ctypes
 from sys import platform
-
-
 try:
     import requests
 except:
     os.system("python3 -m pip install requests")
+    import requests
 try:
-    from pyfade imqport Fade, Colors
+    from pyfade import Fade, Colors
 except:
     os.system("python3 -m pip install pyfade")
+    from pyfade import Fade, Colors
 
 try:
     from pycenter import center
 except:
     os.system("python3 -m pip install pycenter")
+    from pycenter import center
+
 
 
 if platform == "win32":
     ctypes.windll.kernel32.SetConsoleTitleW("kakashi by uchiw4")
+
 
 mangadl = """  
                                                       
@@ -30,7 +33,7 @@ mangadl = """
 +#+  +#+   +#+     +#+ +#+  +#+   +#+     +#+        +#+ +#+    +#+     +#+     
 #+#   #+#  #+#     #+# #+#   #+#  #+#     #+# #+#    #+# #+#    #+#     #+#     
 ###    ### ###     ### ###    ### ###     ###  ########  ###    ### ########### 
-                                                                                                      
+                                                      github.com/uchiw4/kakashi                                                                 
 """
 
 
@@ -72,8 +75,5 @@ while True:
     if restart == "o":
         os.system("cls")
         print(Fade.Vertical(Colors.red_to_yellow, center(mangadl)))
-        i = str(1)
     else:
         break
-
-
