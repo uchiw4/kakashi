@@ -75,5 +75,6 @@ while True:
     if restart == "o":
         os.system("cls")
         print(Fade.Vertical(Colors.red_to_yellow, center(mangadl)))
+        i = str(0)
     else:
         break
