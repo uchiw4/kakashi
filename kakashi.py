@@ -1,27 +1,20 @@
 import os
-import ctypes
 from sys import platform
 try:
     import requests
 except:
     os.system("python3 -m pip install requests")
-    import requests
 try:
     from pyfade import Fade, Colors
 except:
     os.system("python3 -m pip install pyfade")
-    from pyfade import Fade, Colors
 
 try:
     from pycenter import center
 except:
     os.system("python3 -m pip install pycenter")
-    from pycenter import center
 
 
-
-if platform == "win32":
-    ctypes.windll.kernel32.SetConsoleTitleW("kakashi by uchiw4")
 
 
 mangadl = """  
@@ -33,48 +26,97 @@ mangadl = """
 +#+  +#+   +#+     +#+ +#+  +#+   +#+     +#+        +#+ +#+    +#+     +#+     
 #+#   #+#  #+#     #+# #+#   #+#  #+#     #+# #+#    #+# #+#    #+#     #+#     
 ###    ### ###     ### ###    ### ###     ###  ########  ###    ### ########### 
-                                                      github.com/uchiw4/kakashi                                                                 
+                                                                                                      
 """
 
 
 print(Fade.Vertical(Colors.red_to_yellow, center(mangadl)))
 
-i = str(1)
-
+page = str(1)
 while True:
     manga = input("\033[33m Manga (remplacer les espaces par des tirets) >  ")
-    chapitre = input("\033[33m Chapitre >  ")
+    quantity = input("\n\033[33m Souhaites-tu télécharger plusieurs chapitres en même temps ?  [o/n] >  ")
+    if quantity == "o":
 
-    path = manga+"/"+chapitre
-    try:
-        os.mkdir(manga)
-    except:
-        pass
-    try:
-        os.mkdir(path)
-    except:
-        pass
+        chapter_a = int(input("\033[33m Du chapitre >  "))
+        chapter_b = int(input("\033[33m Au chapitre >  "))
+        print(f"\n\033[33m Tu vas télécharger les scans du manga : {manga} du chapitre {chapter_a} au {chapter_b}.")
 
-
-    re = requests.get("https://scansmangas.xyz")
-    while re.status_code != 404:    
-
-        re = requests.get("https://scansmangas.xyz/scans/"+manga+"/"+chapitre+"/"+i+".jpg")
-        if re.status_code == 404:
+        try:
+            os.mkdir(manga)
+        except:
             pass
-        else:
-            with open(manga+"/"+chapitre+"/"+manga+"_"+i+".jpg","wb")as f:
+        for i in range(chapter_a, chapter_b+1):
+            try:
+                os.mkdir(f"{manga}/{i}")
+            except:
+                pass
+
+        for i in range(chapter_a, chapter_b+1):
+            while True:
+                i = str(i)
+                re = requests.get(f"https://scansmangas.xyz/scans/{manga}/{i}/{page}.jpg")
+                if re.status_code != 404:
+                    with open(f"{manga}/{i}/{manga}_{page}.jpg","wb")as f:
+                        f.write(re.content)  
+                    if platform == "win32":
+                        os.system("cls")
+                    else:
+                        os.system("clear")
+
+                    print(Fade.Vertical(Colors.red_to_yellow, center(mangadl)))
+                    print(f"\n\033[33m Page {page}, chapitre {i} téléchargée !")
+                    page = str(int(page)+1)
+                else:
+                    page = str(1)
+                    print(f"\n\033[33m Chapitre {i} de {manga} téléchargé !")
+                    break
+
+    
+
+
+    else:
+        chapitre = input("\033[33m Chapitre >  ")
+
+        path = manga+"/"+chapitre
+        try:
+            os.mkdir(manga)
+        except:
+            pass
+        try:
+            os.mkdir(path)
+        except:
+            pass
+
+        while True:    
+
+            re = requests.get(f"https://scansmangas.xyz/scans/{manga}/{chapitre}/{page}.jpg")
+            if re.status_code != 404:
+                with open(f"{manga}/{chapitre}/{manga}_{page}.jpg","wb")as f:
                     f.write(re.content)  
-            i = str(int(i)+1)
-        
-    print("\033[33m Chapitre "+chapitre+"\033[33m de "+manga+"\033[33m téléchargé mon reuf !")
+                if platform == "win32":
+                    os.system("cls")
+                else:
+                    os.system("clear")
 
 
-    restart = input("\033[33m On continue ? [o/n] ")
+                print(Fade.Vertical(Colors.red_to_yellow, center(mangadl)))
+                print(f"\n\033[33m Page {page} téléchargée !")
+                page = str(int(page)+1)
+            else:
+                break
+
+        print(f"\n\033[33m Chapitre {chapitre} de {manga} téléchargé !")
+
+
+    restart = input("\n\033[33m On continue ? [o/n] ")
 
     if restart == "o":
-        os.system("cls")
+        if platform == "win32":
+            os.system("cls")
+        else:
+            os.system("clear")
         print(Fade.Vertical(Colors.red_to_yellow, center(mangadl)))
-        i = str(0)
+        page = str(1)
     else:
         break
