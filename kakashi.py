@@ -4,16 +4,18 @@ try:
     import requests
 except:
     os.system("python3 -m pip install requests")
+    import requests
 try:
     from pyfade import Fade, Colors
 except:
     os.system("python3 -m pip install pyfade")
+    from pyfade import Fade, Colors    
 
 try:
     from pycenter import center
 except:
     os.system("python3 -m pip install pycenter")
-
+    from pycenter import center
 
 
 
